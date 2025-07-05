@@ -45,7 +45,7 @@ export default function SummaryCards({ transactions, darkMode = false }: Props) 
         <h3 className={`text-sm ${darkMode ? titleDarkClasses : titleLightClasses}`}>
           Total Spent
         </h3>
-        <p className={`text-xl font-bold ${darkMode ? valueDarkClasses : valueLightClasses}`}>
+        <p className={`text-lg sm:text-xl font-bold break-words max-w-full truncate ${darkMode ? valueDarkClasses : valueLightClasses}`}>
           {formattedTotal}
         </p>
       </div>
