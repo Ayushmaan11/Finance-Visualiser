@@ -40,15 +40,26 @@ export default function SummaryCards({ transactions, darkMode = false }: Props) 
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 w-full max-w-4xl">
-      {/* Total Spent Card */}
-      <div className={`${cardBaseClasses} ${darkMode ? cardDarkClasses : cardLightClasses}`}>
-        <h3 className={`text-sm ${darkMode ? titleDarkClasses : titleLightClasses}`}>
-          Total Spent
-        </h3>
-        <p className={`text-lg sm:text-xl font-bold break-words max-w-full truncate ${darkMode ? valueDarkClasses : valueLightClasses}`}>
-          {formattedTotal}
-        </p>
-      </div>
+    {/* Total Spent Card */}
+  <div className={`${cardBaseClasses} ${darkMode ? cardDarkClasses : cardLightClasses} break-words`}>
+    <h3 className={`text-sm ${darkMode ? titleDarkClasses : titleLightClasses}`}>
+      Total Spent
+    </h3>
+    <p
+      className={`text-xl font-bold ${darkMode ? valueDarkClasses : valueLightClasses}`}
+      style={{
+        wordBreak: "break-word",
+        overflowWrap: "break-word",
+        fontSize: "1.125rem", // Reduce size slightly to help fit
+        lineHeight: "1.25rem",
+        maxWidth: "100%",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+      }}
+    >
+      {formattedTotal}
+    </p>
+  </div>
 
       {/* Top Category Card */}
       <div className={`${cardBaseClasses} ${darkMode ? cardDarkClasses : cardLightClasses}`}>
