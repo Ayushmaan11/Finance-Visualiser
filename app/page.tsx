@@ -247,7 +247,7 @@ const fetchTransactions = async () => {
                               {budget.category}
                             </span>
                             <span className={`font-bold ${darkMode ? "text-indigo-400" : "text-indigo-600"}`}>
-                              ${budget.amount.toLocaleString()}
+                              ₹{budget.amount.toLocaleString()}
                             </span>
                           </div>
                         ))
