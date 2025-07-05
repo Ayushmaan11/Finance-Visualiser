@@ -9,8 +9,9 @@ type Props = {
 };
 
 export default function MonthlyBarChart({ transactions }: Props) {
+  const validTx = Array.isArray(transactions) ? transactions : [];
   // Group transactions by month
-  const monthlyData = transactions.reduce((acc: Record<string, number>, tx) => {
+  const monthlyData = validTx.reduce((acc: Record<string, number>, tx) => {
     const month = new Date(tx.date).toLocaleString("default", { month: "short", year: "numeric" });
     acc[month] = (acc[month] || 0) + tx.amount;
     return acc;

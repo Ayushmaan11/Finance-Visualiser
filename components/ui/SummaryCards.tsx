@@ -8,13 +8,14 @@ type Props = {
 };
 
 export default function SummaryCards({ transactions, darkMode = false }: Props) {
-  const total = transactions.reduce((sum, tx) => sum + tx.amount, 0);
+  const validTx = Array.isArray(transactions) ? transactions : [];
+  const total = validTx.reduce((sum, tx) => sum + tx.amount, 0);
   const formattedTotal = new Intl.NumberFormat('en-IN', {
     style: 'currency',
     currency: 'INR'
   }).format(total);
 
-  const byCategory = transactions.reduce((acc: Record<string, number>, tx) => {
+  const byCategory = validTx.reduce((acc: Record<string, number>, tx) => {
     acc[tx.category] = (acc[tx.category] || 0) + tx.amount;
     return acc;
   }, {});

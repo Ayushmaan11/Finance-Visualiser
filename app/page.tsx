@@ -38,19 +38,43 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState("transactions");
   const [darkMode, setDarkMode] = useState(false);
 
-  const fetchBudgets = async () => {
+const fetchBudgets = async () => {
+  try {
     const res = await fetch("/api/budgets");
     const data = await res.json();
-    setBudgets(data);
-  };
 
-  const fetchTransactions = async () => {
-    setLoading(true);
+    if (Array.isArray(data)) {
+      setBudgets(data);
+    } else {
+      console.error("Invalid budget response:", data);
+      setBudgets([]);
+    }
+  } catch (err) {
+    console.error("Failed to fetch budgets:", err);
+    setBudgets([]);
+  }
+};
+
+
+const fetchTransactions = async () => {
+  setLoading(true);
+  try {
     const res = await fetch("/api/transactions");
     const data = await res.json();
-    setTransactions(data);
+
+    if (Array.isArray(data)) {
+      setTransactions(data);
+    } else {
+      console.error("Invalid transaction response:", data);
+      setTransactions([]);
+    }
+  } catch (err) {
+    console.error("Failed to fetch transactions:", err);
+    setTransactions([]);
+  } finally {
     setLoading(false);
-  };
+  }
+};
 
   useEffect(() => {
     fetchTransactions();

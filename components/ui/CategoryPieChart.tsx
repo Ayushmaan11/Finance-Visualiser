@@ -1,6 +1,6 @@
 "use client";
 
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend, } from "recharts";
 import { Transaction } from "@/app/page";
 
 type Props = {
@@ -14,7 +14,8 @@ const COLORS = [
 ];
 
 export default function CategoryPieChart({ transactions, darkMode = false }: Props) {
-  const grouped = transactions.reduce((acc: Record<string, number>, tx) => {
+  const validTx = Array.isArray(transactions) ? transactions : [];
+  const grouped = validTx.reduce((acc: Record<string, number>, tx) => {
     acc[tx.category] = (acc[tx.category] || 0) + tx.amount;
     return acc;
   }, {});
@@ -38,8 +39,9 @@ export default function CategoryPieChart({ transactions, darkMode = false }: Pro
               data={chartData}
               cx="50%"
               cy="50%"
-              outerRadius={100}
-              label={({ name, percent }) => `${name}: ${((percent ?? 0) * 100).toFixed(0)}%`}
+              outerRadius={100}label={({ name, percent }) => `${name}: ${((percent ?? 0) * 100).toFixed(0)}%`}
+
+              
             >
               {chartData.map((_, index) => (
                 <Cell key={index} fill={COLORS[index % COLORS.length]} />
